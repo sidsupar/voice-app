@@ -25,11 +25,12 @@ model User {
 
 model Posts{
   id Int @id @default(autoincrement())
-  heading String
-  images String[]
-  userId Int
-  user User @relation(fields: [userId], references: [id])
+  heading String?
+  images String?
+  authorId Int
+  author User @relation(fields: [authorId], references: [id])
+  publishDate DateTime?
   desc String
-  likes Int
-  dislikes Int
+  likes Int?
+  dislikes Int?
 }

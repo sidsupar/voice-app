@@ -10,6 +10,7 @@ export default async function signUpMethod(userData: UserSignUp): Promise<{loadi
     try{
 
         const res = await axios.post(`${BASE_URL}/api/v1/user/signup`, userData,{
+            //Won't throw error on getting responses in this range
             validateStatus: status => (status >= 200 && status < 600)
         });
         if(res.status != StatusCodes.created){
@@ -19,6 +20,7 @@ export default async function signUpMethod(userData: UserSignUp): Promise<{loadi
             return {loading, message:res.data.msg as string + "with userId: "+res.data.user?.id }
         }            
         loading = true;
+        
         return {loading, message:res.data.msg}
 
     }catch(err:any){

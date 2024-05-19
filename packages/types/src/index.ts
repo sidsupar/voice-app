@@ -1,4 +1,4 @@
-import { UsignIn, UsignUp, uSignIn, uSignUp } from "./zodValidations";
+import { UsignIn, UsignUp, uSignIn, uSignUp, postBodyValue, PostBodyType } from "./zodValidations";
 
 export enum StatusCodes{
   ok=200,
@@ -19,5 +19,9 @@ export enum StatusCodes{
 
 export type UserSignUp = UsignUp;
 export type UserSignIn = UsignIn;
+export type PostBody = PostBodyType;
 export const userSignUp = uSignUp;
 export const userSignIn = uSignIn;
+export const postBody = postBodyValue;
+
+

@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name": "@voice/userapp",
   "private": true,
   "version": "0.0.0",
   "type": "module",

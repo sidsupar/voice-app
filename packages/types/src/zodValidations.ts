@@ -28,6 +28,30 @@ export const uSignIn = zod.object({
 
 export type UsignIn = zod.infer<typeof uSignIn>;
 
+/*
+model Posts{
+  id Int @id @default(autoincrement())
+  heading String?
+  images String?
+  authorId Int
+  author User @relation(fields: [authorId], references: [id])
+  publishDate DateTime?
+  desc String
+  likes Int?
+  dislikes Int?
+}
+*/
+
+export const postBodyValue = zod.object({
+  heading:zod.string(),
+  images:zod.string().optional(),
+  desc:zod.string(),
+  likes:zod.number().optional(),
+  dislikes:zod.number().optional(),
+})
+
+export type PostBodyType = zod.infer<typeof postBodyValue>
+
 export enum StatusCodes{
   ok=200,
   created=201,

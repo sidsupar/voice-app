@@ -25,6 +25,8 @@
     "packages/*"
   ],
   "dependencies": {
+    "@types/cookie-parser": "^1.4.7",
+    "cookie-parser": "^1.4.6",
     "cypress": "^13.9.0",
     "react-router": "^6.23.1",
     "react-router-dom": "^6.23.1",

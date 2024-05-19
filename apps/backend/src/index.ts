@@ -5,6 +5,7 @@ import { createClient }  from 'redis';
 import connectRedis from 'connect-redis';
 import adminRouter from "./admin/index";
 import userRouter from "./user/index";
+import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -41,8 +42,8 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         secure: false, // if true only transmit cookie over https
-        httpOnly: false, // if true prevent client side JS from reading the cookie 
-        maxAge: 1000 * 60 * 10 // session max age in miliseconds
+        httpOnly: true, // if true prevent client side JS from reading the cookie 
+        maxAge: 1000 * 60 * 60 // session max age in miliseconds
     }
 }));
 
@@ -55,6 +56,8 @@ app.use(cors({
 //adding parsing support
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));//allows nested objects to be read easily(json like exp)
+
+app.use(cookieParser());
 
 app.use("/api/v1/admin", adminRouter);
 app.use("/api/v1/user", userRouter);
@@ -71,4 +74,14 @@ async function main(){
         console.log(err+"Error connecting to port "+port);
     }
 }
+app.use((err:any, req:Express.Request , res:Express.Response, next:(err?: any) => void) => {
+
+    console.error(err.stack); // Log the error stack trace for debugging
+    //@ts-ignore
+    res.status(err.cause).json({ 
+        message: 'Something went wrong!',
+        error:err.message
+    }); // Respond with a generic error message
+  
+});
 main();

@@ -5,6 +5,7 @@ export async function registerUser(body:UserSignUp): Promise<object>{
     console.log("Registering user...");
     try{
         const user = await prisma.user.create({
+            //@ts-ignore
             data:body,
             select:{
                 id:true
@@ -19,6 +20,8 @@ export async function registerUser(body:UserSignUp): Promise<object>{
         console.log("userId: "+user?.id);
         return user;
     }catch(err:any){
+        console.log(err.message);
         return err;
     }
 }
+
