@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
+"./submit-button-load-type": "./src/submit-button-load-type.tsx",
 "./submit-button": "./src/submit-button.tsx",
 "./input-element": "./src/input-element.tsx",
     "./button": "./src/button.tsx",

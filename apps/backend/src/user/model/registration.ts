@@ -11,7 +11,9 @@ export async function registerUser(body:UserSignUp): Promise<object>{
                 id:true
             }
         });
-        console.log(Object.entries(user));
+        console.log("user in registration model: recieved: ");
+        console.log(user);
+
         if(!user?.id){
             throw new Error("Not able to create user",{cause:StatusCodes.serviceUnavailable});
         }
@@ -20,8 +22,11 @@ export async function registerUser(body:UserSignUp): Promise<object>{
         console.log("userId: "+user?.id);
         return user;
     }catch(err:any){
-        console.log(err.message);
-        return err;
+        console.log(`error in registering user... ${err.message}`);
+        if("code" in err && err.code == "P2002"){
+            throw new Error("A user with same credentials already exist", {cause:err.cause ?? StatusCodes.conflict});    
+        }
+        throw new Error(err.message, {cause:err.cause ?? StatusCodes.serviceUnavailable});
     }
 }
 

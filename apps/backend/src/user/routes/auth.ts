@@ -29,14 +29,6 @@ router.post("/signup",async (req, res)=>{
         //calling model registerUser
         const user = await registerUser(body);
 
-        if("code" in user && "message" in user){
-            switch(user.code){
-                case "P2002": 
-                    throw new Error("A user with same credentials already exists");
-                    break;
-                default: throw new Error("Something went wrong in registerUser"+user?.message);
-            }
-        }
         console.log("user: ");
         console.log(user);
 
@@ -46,22 +38,10 @@ router.post("/signup",async (req, res)=>{
         });
 
     }catch(err: any){
-        if(err.message == StatusCodes.invalidInput.toString()){
-            console.log(err.message);
-            res.status(StatusCodes.invalidInput).send({
-                error:err.message
-            });
-        }else if(err.message == StatusCodes.serviceUnavailable.toString()){
-            console.log(err.message);
-            res.status(StatusCodes.serviceUnavailable).json({
-                error:err.message
-            });            
-        }else{
-            console.log(err.message);
-            res.status(StatusCodes.serviceUnavailable).json({
-                error:err.message
-            });
-        }        
+        console.log(err.message);
+        res.status(err.cause).json({
+            error:err.message
+        });     
     }
 
 });
@@ -82,12 +62,6 @@ router.post("/signin",async (req, res)=>{
         //calling model loginUser
         const user = await loginUser(body);
 
-        if("code" in user && "message" in user){
-            switch(user.code){
-                default: throw new Error("Something went wrong in registerUser"+user?.message);
-            }
-        }
-
         console.log("user: ");
         console.log(user);
         const userData = {...user};
@@ -95,7 +69,10 @@ router.post("/signin",async (req, res)=>{
         req.session.userData = userData;
 
         const token = await generateToken(userData);
+
+        //@ts-ignore
         const refreshToken = await generateRefreshToken({id: userData.id});
+
         res.cookie("voiceRefreshToken", refreshToken);
         res.cookie("voiceToken", token);
         res.status(StatusCodes.accepted).json({
@@ -105,22 +82,10 @@ router.post("/signin",async (req, res)=>{
         });
 
     }catch(err: any){
-        if(err.message == StatusCodes.invalidInput.toString()){
-            console.log(err.message);
-            res.status(StatusCodes.invalidInput).send({
-                error:err.message
-            });
-        }else if(err.message == StatusCodes.serviceUnavailable.toString()){
-            console.log(err.message);
-            res.status(StatusCodes.serviceUnavailable).json({
-                error:err.message
-            });            
-        }else{
-            console.log(err.message);
-            res.status(StatusCodes.serviceUnavailable).json({
-                error:err.message
-            });
-        }      
+        console.log(err.message);
+        res.status(err.cause).send({
+            error:err.message
+        });
     }
 });
 
@@ -134,13 +99,15 @@ router.post("/refreshToken", checkRefreshToken, async (req, res)=>{
 
         console.log(`refreshTokenData = ${Object.entries(refreshTokenData)}`);
         console.log(`refreshTokenData = ${Object.entries(refreshTokenData)}`);
+        //@ts-ignore
         console.log(`user with id ${refreshTokenData?.id} requested new token`);
         const relevantTokenData: {id:number} = {
+            //@ts-ignore
             id:refreshTokenData?.id
         }
 
         //setting up new token data
-        let newToken = "";
+        let newToken:string|Error = "";
         try{
             const user = await prisma.user.findFirst({
                 where:{
@@ -179,22 +146,10 @@ router.post("/refreshToken", checkRefreshToken, async (req, res)=>{
         });
 
     }catch(err: any){
-        if(err.message == StatusCodes.invalidInput.toString()){
-            console.log(err.message);
-            res.status(StatusCodes.invalidInput).send({
-                error:err.message
-            });
-        }else if(err.message == StatusCodes.serviceUnavailable.toString()){
-            console.log(err.message);
-            res.status(StatusCodes.serviceUnavailable).json({
-                error:err.message
-            });            
-        }else{
-            console.log(err.message);
-            res.status(StatusCodes.serviceUnavailable).json({
-                error:err.message
-            });
-        }        
+        console.log(err.message);
+        res.status(StatusCodes.invalidInput).send({
+            error:err.message
+        });
     }
 
 });

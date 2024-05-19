@@ -15,7 +15,7 @@ export async function generateRefreshToken(userData:object){
         return token;
     }catch(err:any){
         console.log(`error occured in generating refreshToken:${err.message}`);
-        return new Error(err.message);
+        throw new Error(err.message);
     }
 
 }

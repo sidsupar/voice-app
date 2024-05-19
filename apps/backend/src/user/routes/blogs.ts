@@ -28,9 +28,9 @@ router.post("/writePost" , async(req, res) => {
 
         const result = await storePostData(blog, userData as UserSignUp);
 
-        if(result.status =="error" && "error" in result){
-            throw new Error(result.message + " : " + result.error, {cause:result.cause});
-        }
+        // if(result.status =="error" && "error" in result){
+        //     throw new Error(result.message + " : " + result.error, {cause:result.cause});
+        // }
 
         res.status(StatusCodes.created).json({
             blogId:result.blogId,
@@ -53,9 +53,9 @@ router.get("/getPosts", async (req, res) => {
 
         const result = await getBlogs();
 
-        if(result.status == "error" || "cause" in result){
-            throw new Error(result.message, {cause:result.cause});
-        }
+        // if(result.status == "error" || "cause" in result){
+        //     throw new Error(result.message, {cause:result.cause});
+        // }
 
         res.status(StatusCodes.ok).json({
             result
@@ -76,9 +76,9 @@ router.get("/getPostById/:id", async (req, res) => {
         console.log(`blog with id:${blogId} requested`);
         const result = await getBlogById(blogId);
 
-        if(result.status == "error" || "cause" in result){
-            throw new Error(result.message, {cause:result.cause});
-        }
+        // if(result.status == "error" || "cause" in result){
+        //     throw new Error(result.message, {cause:result.cause});
+        // }
 
         res.status(StatusCodes.ok).json({
             result

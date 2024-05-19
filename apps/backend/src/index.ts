@@ -18,6 +18,7 @@ const redisClient = createClient();
 
 //starting redis client
 async function connectRedisClient(){
+    console.log("Initiating redis client");
     await redisClient.connect();
 }
 
@@ -76,7 +77,7 @@ async function main(){
 }
 app.use((err:any, req:Express.Request , res:Express.Response, next:(err?: any) => void) => {
 
-    console.error(err.stack); // Log the error stack trace for debugging
+    console.error(err.message); // Log the error stack trace for debugging
     //@ts-ignore
     res.status(err.cause).json({ 
         message: 'Something went wrong!',

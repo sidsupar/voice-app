@@ -31,11 +31,7 @@ export default async function getBlogs(skip:number = 0, take:number = 10): Promi
 
     }catch(err:any){
         console.log(err.message);
-        return {
-            status:"error",
-            message:err.message,
-            cause:err.cause
-        }
+        throw new Error(err.message, {cause:err.cause ?? StatusCodes.serviceUnavailable });
     }
 
 }

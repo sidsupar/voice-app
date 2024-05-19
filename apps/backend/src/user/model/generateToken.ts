@@ -13,7 +13,7 @@ export async function generateToken(userData:object){
         return token;
     }catch(err:any){
         console.log(err.message);
-        return new Error(err.message);
+        throw new Error(err.message);
     }
 
 }

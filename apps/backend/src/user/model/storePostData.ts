@@ -37,12 +37,7 @@ export default async function storePostData(blog:Partial<PostBody>, userData:Par
         throw new Error("Id not found in userData: ", {cause:StatusCodes.forbidden})
     }catch(err:any){
         console.log(err.message);
-        return {
-            message:"Blog not created",
-            status:"error",
-            error:err.message,
-            cause:err.cause
-        }
+        throw new Error(err.message, {cause:err.cause ?? StatusCodes.serviceUnavailable });
     }
 
 }

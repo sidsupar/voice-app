@@ -28,6 +28,6 @@ export async function loginUser(body:UserSignIn): Promise<object>{
         return {...user, mob:Number(user.mob)};
     }catch(err:any){
         console.log("Error occured in Model login_user.ts "+err.message);
-        return err;
+        throw new Error(err.message, {cause:err.cause});
     }
 }

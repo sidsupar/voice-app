@@ -22,11 +22,7 @@ export default async function getBlogById(id: number){
 
     }catch(err:any){
         console.log(err.message);
-        return {
-            status:"error",
-            message:err.message,
-            cause:err.cause
-        }
+        throw new Error(err.message, {cause:err.cause ?? StatusCodes.serviceUnavailable });
     }
 
 }
