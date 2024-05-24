@@ -14,7 +14,7 @@ console.log(`EXPRESS PORT IN ENV = ${process.env.HTTP_PORT}`);
 
 const app = express();
 
-const redisClient = createClient();
+export const redisClient = createClient();
 
 //starting redis client
 async function connectRedisClient(){

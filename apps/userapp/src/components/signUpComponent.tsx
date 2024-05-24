@@ -1,6 +1,6 @@
 import { InputElement } from "@repo/ui/input-element";
 import { useState, useEffect } from "react";
-import signUpMethod from "../model/signUpHook";
+import signUpMethod from "../model/signUpModel";
 import { SubmitButtonLoadType } from "@repo/ui/submit-button-load-type";
 
 export default function SignUpComponent(){

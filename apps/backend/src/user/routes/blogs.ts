@@ -69,7 +69,7 @@ router.get("/getPosts", async (req, res) => {
 
 });
 
-router.get("/getPostById/:id", async (req, res) => {
+router.get("/getPost/:id", async (req, res) => {
 
     try{
         const blogId = Number(req.params.id);

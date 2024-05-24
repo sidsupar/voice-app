@@ -16,7 +16,7 @@ datasource db {
 model User {
   id           Int            @id @default(autoincrement())
   name         String?
-  mob          BigInt         @unique
+  mob          BigInt?         @unique
   email        String?        @unique
   address      String?
   password     String

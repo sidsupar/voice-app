@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
+"./switch-button": "./src/switch-button.tsx",
+"./avatar": "./src/avatar.tsx",
+"./texte-area-sizeable": "./src/texte-area-sizeable.tsx",
+"./input-sizeable": "./src/input-sizeable.tsx",
 "./submit-button-load-type": "./src/submit-button-load-type.tsx",
 "./submit-button": "./src/submit-button.tsx",
 "./input-element": "./src/input-element.tsx",

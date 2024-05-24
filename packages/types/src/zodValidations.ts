@@ -12,7 +12,7 @@ id           Int            @id @default(autoincrement())
 
 export const uSignUp = zod.object({
     name:zod.string().max(40).optional(),
-    mob:zod.string().max(12),
+    mob:zod.string().max(12).optional(),
     email:zod.string().email().optional(),
     address:zod.string().max(60).optional(),
     password:zod.string().min(6).regex(/^[A-Za-z0-9]+[%$&*#@]+[A-Za-z0-9%$&*#@]*$/)

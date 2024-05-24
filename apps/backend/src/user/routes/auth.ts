@@ -10,6 +10,7 @@ import jwt from "jsonwebtoken";
 import { checkRefreshToken } from "../middleware/checkRefreshToken";
 import { generateRefreshToken } from "../model/generateRefreshToken";
 import prisma from "@repo/db/config";
+import { checkToken } from "../middleware/checkToken";
 
 const router = express.Router();
 
@@ -154,10 +155,23 @@ router.post("/refreshToken", checkRefreshToken, async (req, res)=>{
 
 });
 
+router.get("/loginStatus", checkUserLogin, checkToken ,async (req, res) => {
+    try{
+        
+        res.status(StatusCodes.ok).json({
+            message:"User is logged in right now!!"
+        })
+
+    }catch(err: any){
+        res.status(StatusCodes.forbidden).json({
+            message:"User is not logged in!!"
+        })
+    }
+})
+
 router.get("/logout", async (req, res) => {
 
     try{
-
         req.session.destroy(()=>{
             res.cookie("voiceToken", null);
             res.cookie("voiceRefreshToken", null);

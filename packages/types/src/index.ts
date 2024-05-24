@@ -24,4 +24,12 @@ export const userSignUp = uSignUp;
 export const userSignIn = uSignIn;
 export const postBody = postBodyValue;
 
+export interface BlogType extends Partial<PostBody> {
+  id?:number
+  authorId?:number
+  author:Partial<UsignUp>
+  publishDate:string
+}
+
+
 

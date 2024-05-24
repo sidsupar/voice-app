@@ -13,7 +13,7 @@ export default async function signUpMethod(userData: UserSignUp): Promise<{statu
             validateStatus: status => (status >= 200 && status < 600)
         });
         
-        await new Promise((res,rej) => {
+        await new Promise((res) => {
             setTimeout(()=> {
                 res(true);
             },2000);

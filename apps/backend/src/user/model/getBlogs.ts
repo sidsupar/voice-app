@@ -12,6 +12,23 @@ export default async function getBlogs(skip:number = 0, take:number = 10): Promi
         console.log(`getBlogs model called... skip=${skip} and take=${take}`);
         const blogs = await prisma.posts.findMany({
             where:{},
+            select:{
+                author:{
+                    select:{
+                        email:true,
+                        id:true,
+                        name:true
+                    }      
+                },
+                authorId:true,
+                desc:true,
+                heading:true,
+                dislikes:true,
+                id:true,
+                images:true,
+                publishDate:true,
+                likes:true
+            },
             orderBy:{
                 publishDate:"desc"
             },
