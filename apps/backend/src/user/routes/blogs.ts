@@ -47,11 +47,15 @@ router.post("/writePost" , async(req, res) => {
 });
 
 
-router.get("/getPosts", async (req, res) => {
+router.get("/getPosts/:searchInput?/:skip?/:take?", async (req, res) => {
 
     try{
-
-        const result = await getBlogs();
+        console.log(`searchName=${req.params?.searchInput} skip=${req.params?.skip} take=${req.params?.take}`)
+        const skip = ("skip" in req.params) && (req.params.skip != undefined) ? Number(req.params.skip) : 0;
+        const take = ("take" in req.params) && (req.params.take != undefined) ? Number(req.params.take): 10;
+        const searchName = ("searchInput" in req.params) && (req.params.searchInput != undefined) ? String(req.params.searchInput) : "";
+        console.log(`searchName=${searchName} skip=${skip} take=${take}`)
+        const result = await getBlogs(searchName, skip, take);
 
         // if(result.status == "error" || "cause" in result){
         //     throw new Error(result.message, {cause:result.cause});

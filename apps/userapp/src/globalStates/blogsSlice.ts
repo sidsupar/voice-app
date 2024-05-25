@@ -9,7 +9,7 @@ const blogsSlice = createSlice({
     initialState,
     reducers:{
         storeBlog: (state, action) => {
-            state = [...state, action.payload];
+            state.push(action.payload);
         },
         deleteBlog: (state, action) => {
             state = state.filter((blog) => blog.id != action.payload);
@@ -19,5 +19,5 @@ const blogsSlice = createSlice({
 
 export const { storeBlog, deleteBlog } = blogsSlice.actions;
 export const blogReducer = blogsSlice.reducer;
-export const setUserDetailsState = (state:RootState) => state.blogs;
+export const setBlogsState = (state:RootState) => state.blogs;
 

@@ -18,7 +18,7 @@ export default function ShortBlogCard({blog}: {blog:BlogType}){
 
     return(
         <div className="flex flex-col items-start p-2 relative
-                        border-[2px] w-full rounded-md mt-[1vh] 
+                        xs:border-[2px] w-full rounded-md mt-[1vh] 
                         shadow sm:w-[50vw] dark:border-sky-600
                         "
         >
@@ -36,10 +36,9 @@ export default function ShortBlogCard({blog}: {blog:BlogType}){
                         <AuthorDetailsCard author={blog.author}/> 
                     </div> : null}
             </div>
-            <div className="w-fit border-[2px] p-1 flex flex-col
+            <div className="w-fit xs:border-[2px] p-1 flex flex-col
                             justify-start rounded-md md:gap-2
-                            shadow
-                            dark:border-sky-600 ">
+                            shadow dark:border-sky-600 ">
                 <div className="">
                     <ShortBlogData heading={blog.heading as string} desc={blog.desc as string}/>
                 </div>

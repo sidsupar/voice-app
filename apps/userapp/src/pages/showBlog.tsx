@@ -15,7 +15,7 @@ export default function ShowBlog(){
 
     useEffect(function ( ){
         setLoading(true);
-        console.log("calling getBlogById--------------------------")
+        console.log("calling getBlogById from showBlog--------------------------")
         const getBlog = async ()=>{
             try{
                 const {status, data} = await getBlogById(id);

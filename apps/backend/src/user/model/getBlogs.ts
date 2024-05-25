@@ -1,7 +1,7 @@
 import prisma from "@repo/db/config";
 import { StatusCodes } from "@repo/types";
 
-export default async function getBlogs(skip:number = 0, take:number = 10): Promise<{
+export default async function getBlogs(searchName:string = "", skip:number = 0, take:number = 10): Promise<{
                                                                         status:string,
                                                                         message:string,
                                                                         cause?:number
@@ -11,7 +11,22 @@ export default async function getBlogs(skip:number = 0, take:number = 10): Promi
     try{
         console.log(`getBlogs model called... skip=${skip} and take=${take}`);
         const blogs = await prisma.posts.findMany({
-            where:{},
+            where:{
+                OR:[
+                    {
+                        heading:{
+                            contains:searchName,
+                            mode:"insensitive"
+                        }
+                    },
+                    {
+                        desc:{
+                            contains:searchName,
+                            mode:"insensitive"
+                        }
+                    }
+                ]
+            },
             select:{
                 author:{
                     select:{

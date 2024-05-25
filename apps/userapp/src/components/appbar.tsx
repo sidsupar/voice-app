@@ -4,6 +4,8 @@ import AvatarComponent from "./avatarComponent";
 import { useSelector } from "react-redux";
 import { setUserDetailsState } from "../globalStates/userDataSlice";
 import SwitchTheme from "./switchThemeMode";
+import SearchBar from "./seacrhBar";
+import SearchBarComponent from "./searchBarComponent";
 
 export default function Appbar(){
     console.log("Inside AppBar compnent--------------------------------------------------------------");
@@ -12,16 +14,22 @@ export default function Appbar(){
     console.log("Inside AppBar compnent--------------------------------------------------------------");
 
     return(
-        <div className="max-h-fit min-h-[15vh] flex justify-center bg-slate-100 dark:bg-gray-600">
-            <div className="border-b pt-2 pb-2 pl-1 pr-1 flex justify-between w-screen">
-                <div className="flex flex-col justify-center p-2">
+        <div className="max-h-fit min-h-[15vh] relative flex justify-center bg-slate-100 dark:bg-gray-600">
+            <div className="border-b pt-2 pb-2 pl-1 pr-1 grid grid-cols-12 w-screen">
+                <div className="flex flex-col justify-center p-2 col-span-12 xl:col-span-4">
                     <Link to="/home">                
                         <div className="underline underline-offset-2 flex flex-col justify-center text-xl font-sans font-bold">
                             voice
                         </div>
                     </Link>
-                </div>            
-                <div className="flex justify-between gap-5">
+                </div>
+                <div className="flex flex-col justify-center col-span-12 xl:col-span-4">
+                    <SearchBarComponent />
+                </div>
+                <div className="col-span-0 xl:col-span-1">
+                    
+                </div>
+                <div className="flex flex-col items-center gap-5 xs:flex-row justify-center gap-5 col-span-12 xl:col-span-3">
                     <div className="flex flex-col justify-center">
                         <div className="">
                             <SwitchTheme />
