@@ -1,7 +1,3 @@
-# Turborepo starter
-
-This is an official starter Turborepo.
-
 ## Running project in local environment
 
 - copy all the .env.example files into .env
