@@ -9,9 +9,6 @@
 ```sh
 npm run start
 ```
-## Running project in local environment with docker
-
-copy all the .env.example files into .env
 
 ## Using this example
 
