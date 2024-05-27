@@ -5,9 +5,14 @@ This is an official starter Turborepo.
 ## Running project in local environment
 
 copy all the .env.example files into .env
+##
 start docker daemon
-run "npm run start" in the root folder
+##
+run the following command in the root folder
 
+```sh
+npm run start
+```
 ## Running project in local environment with docker
 
 copy all the .env.example files into .env
