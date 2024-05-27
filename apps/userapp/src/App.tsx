@@ -37,7 +37,7 @@ function App() {
                                       <ShowBlog />
                                     </ProtectedRoute>
               } />
-              <Route path="paginatedBlogs/:searchName" element={
+              <Route path="paginatedBlogs/:searchName?" element={
                                     <ProtectedRoute>
                                       <PaginatedBlogs />
                                     </ProtectedRoute>

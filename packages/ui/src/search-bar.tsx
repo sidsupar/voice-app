@@ -33,7 +33,7 @@ export const SearchBar = ({onInputHandler, skip=0, take=5,onClickHandler}: Searc
 
   useEffect(() =>{
       const handle = async () => {
-                      if(input.length > 0){
+                      if(debouncedInput.length > 0){
                         const results = await onInputHandler(input, skip, take);
                         console.log("Inside searchbar");
                         console.log(results)
@@ -47,10 +47,12 @@ export const SearchBar = ({onInputHandler, skip=0, take=5,onClickHandler}: Searc
   }, [debouncedInput]);
 
   function clickHandler(){
-    console.log("searching for "+debouncedInput);
-    onClickHandler(debouncedInput);
-    setDebouncedInput("");
-    setInput("");
+    if(debouncedInput.length > 0){
+      console.log("searching for "+debouncedInput);
+      onClickHandler(debouncedInput);
+      setDebouncedInput("");
+      setInput("");
+    }
   }
 
   return (

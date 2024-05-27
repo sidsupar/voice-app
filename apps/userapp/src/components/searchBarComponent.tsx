@@ -7,7 +7,7 @@ export default function SearchBarComponent(){
 
     const navigate = useNavigate();
     function onClickHandler(searchName:string){
-        navigate(`/auth/paginatedBlogs/${searchName}`);
+        navigate(`/auth/paginatedBlogs/${searchName != undefined ? searchName :""}`);
     }
 
     return(
