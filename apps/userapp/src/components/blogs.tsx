@@ -13,19 +13,13 @@ export default function Blogs({blogs}: {blogs:Array<BlogType>}){
                             items-center mt-[1vh] 
                             mb-[1vh] border-[2px] rounded-md shadow
                             md:p-2 dark:border-sky-600">
-                {blogs.map((blog:BlogType, index)=>{
+                {blogs?.map((blog:BlogType, index)=>{
 
                     return(
                         <div key={"blogCard-"+index}>
-                            <Link to={`/auth/blog`} 
-                                  state={{
-                                    blogId:blog?.id
-                                  }}
-                            >
                                 <div className="">
                                     <ShortBlogCard blog={blog}/>
-                                </div>
-                            </Link>                                    
+                                </div>                  
                         </div>    
                     )
                 })}

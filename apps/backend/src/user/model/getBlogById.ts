@@ -8,6 +8,22 @@ export default async function getBlogById(id: number){
             where:{
                 id:id
             },
+            select:{
+                heading:true,
+                authorId:true,
+                desc:true,
+                dislikes:true,
+                likes:true,
+                images:true,
+                publishDate:true,
+                id:true,
+                author:{
+                    select:{
+                        email:true,
+                        name:true,                        
+                    }
+                }
+            }
         });
 
         if(blog == null){

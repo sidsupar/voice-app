@@ -14,7 +14,7 @@ export default function ShortBlogMetaData({blog}: {blog:BlogType}){
                                     dark:hover:bg-sky-600
                                     "
                     >
-                        {Math.floor((blog?.desc?.length ?? 0)/10)+" mins"}
+                        {Math.floor((blog?.desc?.length ?? 0)/240)+" mins"}
                     </div>
                     <div className="cursor-pointer relative rounded-md p-2">
                         {blog?.publishDate}

@@ -66,7 +66,7 @@ export async function loginUser(body:UserSignIn): Promise<object>{
             const {password, ...userWithoutPass} = user;
             return {...userWithoutPass, mob:Number("mob" in userWithoutPass ?  userWithoutPass.mob : -1)};
         }
-        throw new Error("Something went wrong while logging you in", {cause:StatusCodes.serviceUnavailable});
+        throw new Error("Something went wrong while logging you in", {cause:StatusCodes.unauthorized});
     }catch(err:any){
         console.log("Error occured in Model login_user.ts "+err.message);
         throw new Error(err.message, {cause:err.cause});

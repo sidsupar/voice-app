@@ -8,6 +8,7 @@ import HomePage from './pages/homepage'
 import WriteBlog from './pages/writeblog'
 import { Suspense } from 'react'
 import ShowBlog from './pages/showBlog'
+import PaginatedBlogs from './pages/paginatedBlogs'
 
 function App() {
   
@@ -34,6 +35,11 @@ function App() {
               <Route path="blog" element={
                                     <ProtectedRoute>
                                       <ShowBlog />
+                                    </ProtectedRoute>
+              } />
+              <Route path="paginatedBlogs/:searchName" element={
+                                    <ProtectedRoute>
+                                      <PaginatedBlogs />
                                     </ProtectedRoute>
               } />
           </Route>

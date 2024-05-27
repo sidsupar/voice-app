@@ -4,12 +4,16 @@ import { redirect } from "react-router";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const USER_ROUTE = import.meta.env.VITE_USER_ROUTE;
 
+// axios.interceptors.response.clear();
+
 export const refreshInterceptor = axios.interceptors.response.use(function (response){
     return response
 }, async function (error) {
 const originalRequest = error.config
+console.log(error)
 if(error.response.status == StatusCodes.forbidden && !originalRequest._retry){
   try{
+    
     console.log("Calling refresh interceptor");
     originalRequest._retry = true;
     const res = await axios.post(`${BASE_URL}/${USER_ROUTE}/refreshToken`,{

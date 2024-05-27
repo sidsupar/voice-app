@@ -19,9 +19,7 @@ export default async function writePost(blog:string, heading:string){
                 status:"success"
     */
     try{
-        const res = await axios.post(`${BASE_URL}/${BLOG_ROUTE}/writePost`, postBody,{
-            validateStatus: status => (status >= 200 && status < 600)
-        });
+        const res = await axios.post(`${BASE_URL}/${BLOG_ROUTE}/writePost`, postBody);
 
         if(res.status == StatusCodes.created){
             return res

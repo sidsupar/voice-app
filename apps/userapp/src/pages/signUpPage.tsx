@@ -4,7 +4,7 @@ import AppbarNotAuth from "../components/appbarNotAuth";
 import SignUpComponent from "../components/signUpComponent";
 
 export default function SignUpPage(){
-
+    axios.interceptors.response.clear();
     axios.interceptors.response.eject(refreshInterceptor);
 
     return(

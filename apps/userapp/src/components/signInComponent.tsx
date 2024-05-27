@@ -5,6 +5,7 @@ import signInMethod from "../model/signInModel";
 import { useDispatch, useSelector } from "react-redux";
 import { checkUserLoginStatusThunk, setUserDetails, setUserDetailsState } from "../globalStates/userDataSlice";
 import { useNavigate } from "react-router";
+import { EmojiGenerator } from "@repo/ui/emoji-generator";
 
 export default function SignInComponent(){
 
@@ -68,9 +69,9 @@ export default function SignInComponent(){
 
     return(
         <>        
-            <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div className="flex flex-col items-center max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <div className={`${status == "error" ? "text-red-500" : "text-green-500"} font-sm`}>
-                    {showMsg && msg}
+                    {showMsg && msg} {showMsg && ((status == "error") ?<EmojiGenerator symbol={"0x1F9D0"} /> : <EmojiGenerator symbol={"0x1F60E"} />)}
                 </div>
                 <div className="flex flex-col items-center gap-2">
                     <div className="font-italic font-extrabold text-4xl">

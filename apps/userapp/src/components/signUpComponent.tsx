@@ -2,9 +2,11 @@ import { InputElement } from "@repo/ui/input-element";
 import { useState, useEffect } from "react";
 import signUpMethod from "../model/signUpModel";
 import { SubmitButtonLoadType } from "@repo/ui/submit-button-load-type";
+import { useNavigate } from "react-router";
 
 export default function SignUpComponent(){
 
+    const navigate = useNavigate();
     const [mobile, setMobile] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [name, setName] = useState<string>("");
@@ -33,6 +35,9 @@ export default function SignUpComponent(){
                 setStatus(status);
                 setShowMsg(true);
                 setButtonClicked(false);
+                if(status == "success"){
+                    navigate("/auth");
+                }
             }
         }
         registerUser();

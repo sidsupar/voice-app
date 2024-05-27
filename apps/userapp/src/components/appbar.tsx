@@ -4,7 +4,6 @@ import AvatarComponent from "./avatarComponent";
 import { useSelector } from "react-redux";
 import { setUserDetailsState } from "../globalStates/userDataSlice";
 import SwitchTheme from "./switchThemeMode";
-import SearchBar from "./seacrhBar";
 import SearchBarComponent from "./searchBarComponent";
 
 export default function Appbar(){
@@ -26,10 +25,10 @@ export default function Appbar(){
                 <div className="flex flex-col justify-center col-span-12 xl:col-span-4">
                     <SearchBarComponent />
                 </div>
-                <div className="col-span-0 xl:col-span-1">
+                {/* <div className="col-span-0 xl:col-span-1">
                     
-                </div>
-                <div className="flex flex-col items-center gap-5 xs:flex-row justify-center gap-5 col-span-12 xl:col-span-3">
+                </div> */}
+                <div className="flex flex-col items-center gap-5 xs:flex-row justify-center xl:justify-end col-span-12 xl:col-span-4">
                     <div className="flex flex-col justify-center">
                         <div className="">
                             <SwitchTheme />

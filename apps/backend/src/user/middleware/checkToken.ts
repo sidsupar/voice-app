@@ -20,7 +20,7 @@ export async function checkToken(req:any, res:any, next:(err?:any) => void){
         res.status(StatusCodes.forbidden).json({
             error:err.message
         });
-        next(err);
+        // next(err);
     }
 
 }

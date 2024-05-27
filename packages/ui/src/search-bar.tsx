@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 interface SearchBarProps {
   onInputHandler: (input: string, skip:number, take:number) => Promise<Array<BlogType>>,
+  onClickHandler?: any,
   skip?:number,
   take?:number
 }
@@ -22,36 +23,39 @@ function useDebouncedInput(input:string, setInput:React.Dispatch<React.SetStateA
 
 }
 
-export const SearchBar = ({onInputHandler, skip=0, take=5}: SearchBarProps) => {
+export const SearchBar = ({onInputHandler, skip=0, take=5,onClickHandler}: SearchBarProps) => {
   
   const [input, setInput] = useState("");
   const [debouncedInput, setDebouncedInput] = useState("");
   const [result, setResult] = useState<Array<BlogType>>();
   useDebouncedInput(input, setDebouncedInput);
-  console.log(`input = ${input} and debouncedInput=${debouncedInput}`)
+  console.log(`input = ${input} and debouncedInput=${debouncedInput}`);
 
-  function clickHandler() {
-    console.log(`Search called with skip=${skip} take=${take} input=${input}`);
+  useEffect(() =>{
+      const handle = async () => {
+                      if(input.length > 0){
+                        const results = await onInputHandler(input, skip, take);
+                        console.log("Inside searchbar");
+                        console.log(results)
+                        if("status" in results && "data" in results && results.status ){
+                          console.log("Setting result");
+                          setResult(results.data.posts as Array<BlogType>)
+                       }
+                      }                       
+                    }
+      handle();                    
+  }, [debouncedInput]);
+
+  function clickHandler(){
+    console.log("searching for "+debouncedInput);
+    onClickHandler(debouncedInput);
     setDebouncedInput("");
     setInput("");
   }
 
-  useEffect(() =>{
-      const handle = async () => {
-                       const results = await onInputHandler(input, skip, take);
-                       console.log("Inside searchbar");
-                       console.log(results)
-                       if("status" in results && "data" in results && results.status ){
-                          console.log("Setting result");
-                          setResult(results.data.posts as Array<BlogType>)
-                       }
-                    }
-      handle();                    
-  }, [debouncedInput])
-
   return (
     <div className="relative">      
-      <div className="flex flex-col xs:flex-row xs:justify-center xs:gap-5 items-center max-w-lg mx-auto">   
+      <div className="flex flex-col items-center xs:flex-row max-w-lg mx-auto">   
           <label htmlFor="voice-search" className="sr-only">Search</label>
           <div className="relative w-full">
               <input onInput={(e) => {
@@ -65,7 +69,7 @@ export const SearchBar = ({onInputHandler, skip=0, take=5}: SearchBarProps) => {
                                 border-gray-300 text-gray-900
                                 text-sm rounded-lg focus:ring-blue-500
                                 focus:border-blue-500 block w-full 
-                                p-2.5 dark:bg-gray-700 
+                                p-2.5  dark:bg-gray-700 
                                 dark:border-gray-600 dark:placeholder-gray-400 
                                 dark:text-white dark:focus:ring-blue-500 
                                 dark:focus:border-blue-500" 
@@ -74,13 +78,13 @@ export const SearchBar = ({onInputHandler, skip=0, take=5}: SearchBarProps) => {
               />
               <button type="button" className="absolute inset-y-0 end-0 flex items-center pe-3">
                   <svg className="w-4 h-4 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7v3a5.006 5.006 0 0 1-5 5H6a5.006 5.006 0 0 1-5-5V7m7 9v3m-3 0h6M7 1h2a3 3 0 0 1 3 3v5a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V4a3 3 0 0 1 3-3Z"/>
+                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 7v3a5.006 5.006 0 0 1-5 5H6a5.006 5.006 0 0 1-5-5V7m7 9v3m-3 0h6M7 1h2a3 3 0 0 1 3 3v5a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V4a3 3 0 0 1 3-3Z"/>
                   </svg>
               </button>
           </div>
           <button onClick={clickHandler} type="submit" className="inline-flex items-center py-2.5 px-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
               <svg className="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
               </svg>Search
           </button>
       </div>
@@ -97,7 +101,7 @@ function ShowResultsTab({result, setInput, setDebouncedInput}:{result:Array<Blog
   console.log("ShowResultsTab");
   console.log(result);
   return(
-    <div className="shadow rounded-b-md p-2 absolute z-[9999] bg-white border-[2px]
+    <div className="shadow w-full rounded-b-md p-2 absolute z-[9999] bg-white border-[2px]
                     dark:bg-gray-600 dark:text-slate-300"
     >
       {result?.map((blog, index) => {

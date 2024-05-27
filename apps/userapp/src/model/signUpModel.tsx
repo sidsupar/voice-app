@@ -8,10 +8,7 @@ export default async function signUpMethod(userData: UserSignUp): Promise<{statu
     console.log("SignUp called");
     console.log(`making call to ${BASE_URL}/${USER_ROUTE}/signup`)
     try{
-        const res = await axios.post(`${BASE_URL}/${USER_ROUTE}/signup`, userData,{
-            //Won't throw error on getting responses in this range
-            validateStatus: status => (status >= 200 && status < 600)
-        });
+        const res = await axios.post(`${BASE_URL}/${USER_ROUTE}/signup`, userData);
         
         await new Promise((res) => {
             setTimeout(()=> {

@@ -16,7 +16,7 @@ export async function checkUserLogin(req:Express.Request, res:Express.Response, 
         res.status(StatusCodes.forbidden).json({
             error:err.message
         });
-        next(err);
+        // next(err);
     }
 
 }

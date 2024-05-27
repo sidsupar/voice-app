@@ -16,18 +16,18 @@ export async function getBlogsModel(searchName?:string, skip?:number, take?:numb
         if((searchName == undefined || searchName == null) && take == undefined){
             console.log("Calling for blogs in bulk");
             const res = await axios.get(`${BASE_URL}/${BLOG_ROUTE}/getPosts`);
-            if(res.data.length < 0){
+            if(res?.data?.length < 0){
                 throw new Error("No blogs fetched");
             }
-            data = res.data;
+            data = res?.data;
             status = true;
         }else{
             console.log("Calling selected seacrh for blogs in bulk");
             const res = await axios.get(`${BASE_URL}/${BLOG_ROUTE}/getPosts/${searchName}/${skip}/${take}`);
-            if(res.data.length < 0){
+            if(res?.data.length < 0){
                 throw new Error("No blogs fetched");
             }
-            data = res.data.result;
+            data = res?.data.result;
             status = true;
         }
         

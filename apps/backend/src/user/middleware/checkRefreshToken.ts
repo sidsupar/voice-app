@@ -20,7 +20,7 @@ export async function checkRefreshToken(req:any, res:any, next:(err?:any) => voi
         res.status(StatusCodes.forbidden).json({
             error:err.message
         });
-        next(err);
+        // next(err);
     }
 
 }

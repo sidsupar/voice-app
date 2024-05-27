@@ -23,10 +23,7 @@ export default async function signInMethod(userData: UserDataSignIn): Promise<{s
         signinBody = {...userData, email:userData.username}
     }
     try{
-        const res = await axios.post(`${BASE_URL}/${USER_ROUTE}/signin`, signinBody,{
-            //Won't throw error on getting responses in this range
-            validateStatus: status => (status >= 200 && status < 600)
-        });
+        const res = await axios.post(`${BASE_URL}/${USER_ROUTE}/signin`, signinBody);
         
         await new Promise((res) => {
             setTimeout(()=> {
@@ -38,13 +35,18 @@ export default async function signInMethod(userData: UserDataSignIn): Promise<{s
             throw new Error(res.data.error);
         }
         if("user" in res.data && "id" in res.data.user){
-            return {status:"success", user:res.data?.user, message:res.data.msg as string + "with userId: "+res.data.user?.id }
+            // return {status:"success", user:res.data?.user, message:res.data.msg as string + " with userId: "+res.data.user?.id }
+            return {status:"success", user:res.data?.user, message:"Logged in successfully" }
         }            
         
         return {status:"success",message:res.data.msg, user:res.data?.user}
 
     }catch(err:any){
         console.log("Error occured in SignIn hook: "+err.message);
+        console.log(err);
+        if(err?.response?.status == StatusCodes.unauthorized){
+            return {status:"error", message:"Please provide valid login credentials"}
+        }
         
         return {status:"error", message:err.message}
     }

@@ -5,7 +5,6 @@ const SignInComponent = lazy(() => import("../components/signInComponent"));
 import { refreshInterceptor } from "../axiosInterceptors";
 
 export default function SignInPage(){
-    axios.interceptors.request.eject(refreshInterceptor);
     axios.interceptors.response.clear();
     axios.interceptors.response.eject(refreshInterceptor);
     return (

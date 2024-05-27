@@ -13,6 +13,7 @@ export default async function logoutModel(): Promise<[boolean, boolean]>{
         if(!(response.status == StatusCodes.accepted)){
             throw new Error("Not able to log you out");
         }
+        
         await new Promise((res) => {
                 setTimeout(()=>{
                     res(true)

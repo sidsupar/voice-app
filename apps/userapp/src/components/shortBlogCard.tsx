@@ -4,6 +4,7 @@ import { useState } from "react";
 import AuthorDetailsCard from "./authorDetailsCard";
 import ShortBlogMetaData from "./shortBlogMetaData";
 import ShortBlogData from "./shortBlogData";
+import { Link } from "react-router-dom";
 
 export default function ShortBlogCard({blog}: {blog:BlogType}){
     const [showAuthorDetails, setShowAuthorDetails] = useState<boolean>(false);
@@ -40,7 +41,13 @@ export default function ShortBlogCard({blog}: {blog:BlogType}){
                             justify-start rounded-md md:gap-2
                             shadow dark:border-sky-600 ">
                 <div className="">
-                    <ShortBlogData heading={blog.heading as string} desc={blog.desc as string}/>
+                    <Link to={`/auth/blog`} 
+                                  state={{
+                                    blogId:blog?.id
+                                  }}
+                    >
+                        <ShortBlogData heading={blog.heading as string} desc={blog.desc as string}/>
+                    </Link>
                 </div>
                 <div className="flex flex-col justify-center md:w-[50%]">
                     <div className="flex flex-col justify-center">

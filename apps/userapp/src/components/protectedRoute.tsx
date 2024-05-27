@@ -11,12 +11,12 @@ console.log("Interceptor imported");
 export default function ProtectedRoute({children}: {children:React.ReactNode}){
 
     const userDetails = useSelector(setUserDetailsState);
-    console.log("UserDetails using useSelector in ProtectedRoute")
-    console.log(userDetails);
+    // console.log("UserDetails using useSelector in ProtectedRoute")
+    // console.log(userDetails);
     const loginStatus = userDetails?.loginStatus;
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    console.log(`loginStatus = ${loginStatus}`);
+    // console.log(`loginStatus = ${loginStatus}`);
     
     useEffect(()=>{
         let ignore = false;
@@ -26,9 +26,9 @@ export default function ProtectedRoute({children}: {children:React.ReactNode}){
             navigate("/auth");
         }
         return () => {
-            console.log("Axios interceptors")
-            console.log(axios.interceptors)
-            console.log("Axios interceptors")
+            // console.log("Axios interceptors")
+            // console.log(axios.interceptors)
+            // console.log("Axios interceptors")
             ignore = true;
         };
     });
