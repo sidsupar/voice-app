@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "start": "docker-compose up -d && turbo dev",
+    "start": "docker-compose up -d && cd ./packages/db && npx prisma migrate dev --name 'init' && cd ../.. && turbo dev",
     "dev":"turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
