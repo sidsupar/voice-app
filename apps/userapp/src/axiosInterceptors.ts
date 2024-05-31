@@ -23,8 +23,6 @@ export const refreshInterceptor = axios.interceptors.response.use(
 
                 if (res.status === StatusCodes.accepted) {
                     console.log("Credentials refreshed");
-                    // Set the new token in the original request and retry it
-                    originalRequest.headers['Authorization'] = `Bearer ${res.data.token}`;
                     return axios(originalRequest);
                 } else {
                     console.log("Token refresh failed, redirecting to auth");
