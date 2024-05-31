@@ -12,7 +12,7 @@ type ThunkApiConfig = {
 }
 
 //thunk to chek login status
-export const checkUserLoginStatusThunk:AsyncThunk<ReturnType<any>, string, ThunkApiConfig>= createAsyncThunk("user/loginStatus", async () => {
+export const checkUserLoginStatusThunk:AsyncThunk<ReturnType<any>, string, ThunkApiConfig> = createAsyncThunk("user/loginStatus", async () => {
 
     try{
         const res = await axios.get(`${BASE_URL}/${USER_ROUTE}/loginStatus`);
