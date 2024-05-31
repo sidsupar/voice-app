@@ -3,11 +3,14 @@ import { useLocation, useParams } from "react-router"
 import { getBlogsModel } from "../model/getBlogs";
 import { BlogType } from "@repo/types";
 import Blogs from "../components/blogs";
+import setProgressStep from "../model/setProgressStepValue";
+import ProgressBar from "../components/progressbar";
 
 export default function PaginatedBlogs(){
 
     const [blogs, setBlogs] = useState<Array<BlogType>>();
     const [loading, setLoading] = useState<boolean>(false);
+    const [progress, setProgress] = useState<{step:number, totalSteps:number}>({step:0, totalSteps:0});
     const [show, setShow] = useState<{
         page:number,
         skip:number
@@ -29,18 +32,33 @@ export default function PaginatedBlogs(){
     useEffect(()=>{
         const gettingBlogsForSearch = async ()=>{
             setLoading(true);
+            await setProgressStep(0, 10, 30, setProgress);
+            await setProgressStep(1, 10, 30,  setProgress);
+
             try{
                 const result = await getBlogsModel(searchName ?? "", show.skip, 5);
-
+                await setProgressStep(2, 10, 30,  setProgress);
+                await setProgressStep(3, 10, 30,  setProgress);
                 if(result.status === false){
+                    await setProgressStep(4, 10, 30,  setProgress);
                     throw new Error("Not able get blogs from getBlogsModel in PaginatedBlogs effect");
                 }
                 if(result.data != undefined && "posts" in result?.data){
+                    await setProgressStep(4, 10, 30,  setProgress);
                     console.log("Setting blogs inside PaginatedBlogs after fetch");
+                    await setProgressStep(5, 10, 30,  setProgress);
                     setBlogs(result?.data?.posts);
+                    await setProgressStep(6, 10, 30,  setProgress);
                 }
+                await setProgressStep(7, 10, 30,  setProgress);
+                await setProgressStep(8, 10, 30,  setProgress);
+                await setProgressStep(9, 10, 30,  setProgress);
+                await setProgressStep(9.5, 10, 30,  setProgress);
+                await setProgressStep(10, 10, 30, setProgress);
+                await new Promise((res)=>setTimeout(()=>res(true),100));
                 setLoading(false);
             }catch(err:any){
+                await setProgressStep(10, 10, 30,  setProgress);
                 setLoading(false);
                 console.log("Error occured in effect of PaginatedBlogs: "+err.message);
             }
@@ -79,13 +97,18 @@ export default function PaginatedBlogs(){
                                                 }
         )
     }
+
     if(loading){
+        
         return(
-            <div>
-                Loading...
+            <div className="flex justify-center items-center">
+                <div className="w-[80%] h-[5vh]">
+                    <ProgressBar step={progress.step} totalSteps={progress.totalSteps} />
+                </div>
             </div>
         )
     }
+
     return(
         <div className="flex flex-col items-center">
             <div>

@@ -15,13 +15,22 @@ export default function Appbar(){
     return(
         <div className="max-h-fit min-h-[15vh] relative flex justify-center bg-slate-100 dark:bg-gray-600">
             <div className="border-b pt-2 pb-2 pl-1 pr-1 grid grid-cols-12 w-screen">
-                <div className="flex flex-col justify-center p-2 col-span-12 xl:col-span-4">
-                    <Link to="/home">                
-                        <div className="underline underline-offset-2 flex flex-col justify-center text-xl font-sans font-bold">
-                            voice
-                        </div>
-                    </Link>
-                </div>
+                <div className="flex gap-5 items-center p-2 col-span-12 xl:col-span-4">
+                    <div>
+                        <Link to="/home">                
+                            <div className="underline underline-offset-2 flex flex-col justify-center text-xl font-sans font-bold">
+                                voice
+                            </div>
+                        </Link>
+                    </div>
+                    <div>
+                        <Link to="/auth/dashboard">                
+                            <div className="underline underline-offset-2 flex flex-col justify-center text-xl font-sans font-bold">
+                                Dashboard
+                            </div>
+                        </Link>
+                    </div>
+                </div>                
                 <div className="flex flex-col justify-center col-span-12 xl:col-span-4">
                     <SearchBarComponent />
                 </div>

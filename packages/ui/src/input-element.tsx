@@ -15,7 +15,7 @@ export const InputElement = ({state, setState, placeholder, label}: InputElement
   }
 
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center w-[90%]">
       <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor={label}>{label}</label>
       <input data-cy={"input-"+label} id={label} value={state} onInput={handleInput} 
             placeholder={placeholder}

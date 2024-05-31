@@ -1,6 +1,6 @@
 //User
 import express from "express";
-import { StatusCodes, UserSignUp, postBody } from "@repo/types";
+import { BlogType, StatusCodes, UserSignUp, postBody } from "@repo/types";
 import { checkUserLogin } from "../middleware/checkUserLogin";
 import prisma from "@repo/db/config";
 import jwt from "jsonwebtoken";
@@ -95,6 +95,85 @@ router.get("/getPost/:id", async (req, res) => {
     }
 
 });
+
+router.get("/likeBlog/:id/:op", async (req, res) => {
+    try{
+
+        const id:number = Number(req.params.id);
+        const op:string = String(req.params.op);
+
+        prisma.$transaction(async (txn) => {
+            await prisma.$queryRaw`SELECT * FROM "Posts" FOR UPDATE`;
+            const result = await txn.posts.update({
+                where:{
+                    id: id as number,
+                },
+                data:{
+                    likes:{
+                        [op == "inc" ? "increment" : "decrement"] : 1
+                    }
+                },
+                select:{
+                    id:true,
+                    likes:true,
+                    dislikes:true
+                }
+            });
+            if(!("id" in result && result.id == id)){
+                throw new Error("Error updating likes for blogId: "+id);
+            }
+            res.status(StatusCodes.conflict).json({
+                msg:"Likes updated",
+                likes:result?.likes,
+                dislikes:result.dislikes
+            });
+        });
+        
+    }catch(err: any){
+        res.status(StatusCodes.conflict).json({
+            msg:err.message
+        })
+    }
+})
+
+router.get("/dislikeBlog/:id/:op", async (req, res) => {
+    try{
+
+        const id:number = Number(req.params.id);
+        const op:string = String(req.params.op);
+        prisma.$transaction(async (txn) => {
+            await prisma.$queryRaw`SELECT * FROM "Posts" FOR UPDATE`;
+            const result = await txn.posts.update({
+                where:{
+                    id: id as number,
+                },
+                data:{
+                    dislikes:{
+                        [op == "inc" ? "increment" : "decrement"] : 1
+                    }
+                },
+                select:{
+                    id:true,
+                    likes:true,
+                    dislikes:true
+                }
+            });
+            if(!("id" in result && result.id == id)){
+                throw new Error("Error updating likes for blogId: "+id);
+            }
+            res.status(StatusCodes.conflict).json({
+                msg:"diskes updated",
+                likes:result?.likes,
+                dislikes:result.dislikes
+            });
+        });
+        
+    }catch(err: any){
+        res.status(StatusCodes.conflict).json({
+            msg:err.message
+        })
+    }
+})
 
 
 export default router;

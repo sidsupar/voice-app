@@ -1,4 +1,5 @@
 import { InputElement } from "@repo/ui/input-element";
+import { InputElementHideShow } from "@repo/ui/input-element-hideshow";
 import { useState, useEffect } from "react";
 import { SubmitButtonLoadType } from "@repo/ui/submit-button-load-type";
 import signInMethod from "../model/signInModel";
@@ -6,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { checkUserLoginStatusThunk, setUserDetails, setUserDetailsState } from "../globalStates/userDataSlice";
 import { useNavigate } from "react-router";
 import { EmojiGenerator } from "@repo/ui/emoji-generator";
+import { Link } from "react-router-dom";
 
 export default function SignInComponent(){
 
@@ -78,9 +80,19 @@ export default function SignInComponent(){
                         SignIn
                     </div>
                     <InputElement state={mobileOrEmail} setState={setMobileOrEmail} placeholder="Enter your email or password" label="UserID" />
-                    <InputElement state={password} setState={setPassword} placeholder="abc@1234A" label="Password" />
+                    <InputElementHideShow state={password} setState={setPassword} placeholder="abc@1234A" label="Password" />
                     <SubmitButtonLoadType loading={loading} buttonText="SignIn" handleClick={handleClick} />
                 </div>
+                <div className="flex justify-center gap-2 mt-[2vh]">
+                    <div className="font-bold text-sm text-sans">
+                        Don't have an account?
+                    </div>
+                    <div className="font-bold text-sm text-sans underline underline-offset-4">
+                        <Link to="/">
+                            SignUp
+                        </Link>
+                    </div>
+                </div>                
             </div>            
         </>
     )

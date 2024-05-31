@@ -57,13 +57,13 @@ const userDataSlice = createSlice({
     },
     extraReducers:(Builder) => {
         Builder.addCase(checkUserLoginStatusThunk.pending, (state, action) => {
-            state.loginStatus=action.payload
+            state.loginStatus = action.payload
         }),
         Builder.addCase(checkUserLoginStatusThunk.fulfilled, (state, action) => {
-            state.loginStatus=action.payload
+            state.loginStatus = action.payload
         }),
         Builder.addCase(checkUserLoginStatusThunk.rejected, (state, action) => {
-            state.loginStatus=action.payload as boolean;
+            state.loginStatus = action.payload as boolean;
         })
     }
 });

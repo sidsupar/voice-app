@@ -17,7 +17,7 @@ export async function checkRefreshToken(req:any, res:any, next:(err?:any) => voi
     }catch(err:any){
         console.log(err.message);
         //@ts-ignore
-        res.status(StatusCodes.forbidden).json({
+        res.status(StatusCodes.unauthorized).json({
             error:err.message
         });
         // next(err);

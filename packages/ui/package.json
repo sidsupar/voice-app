@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
+"./input-element-hideshow": "./src/input-element-hideshow.tsx",
 "./emoji-generator": "./src/emoji-generator.tsx",
 "./search-bar": "./src/search-bar.tsx",
 "./switch-button": "./src/switch-button.tsx",

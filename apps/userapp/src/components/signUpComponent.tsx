@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import signUpMethod from "../model/signUpModel";
 import { SubmitButtonLoadType } from "@repo/ui/submit-button-load-type";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import { InputElementHideShow } from "@repo/ui/input-element-hideshow";
 
 export default function SignUpComponent(){
 
@@ -62,8 +64,18 @@ export default function SignUpComponent(){
                     <InputElement state={email} setState={setEmail} placeholder="jhon.doe@xyz.com" label="Email" />
                     <InputElement state={address} setState={setAddress} placeholder="71, street 2, xyz city, abc state, 100202, NYC, United States" label="Address" />
                     <InputElement state={mobile} setState={setMobile} placeholder="9999999999" label="Contact Number" />
-                    <InputElement state={password} setState={setPassword} placeholder="abc@1234A" label="Password" />
+                    <InputElementHideShow state={password} setState={setPassword} placeholder="abc@1234A" label="Password" />
                     <SubmitButtonLoadType loading={loading} buttonText="SignUp" handleClick={handleClick} />
+                </div>
+                <div className="flex justify-center gap-2 mt-[2vh]">
+                    <div className="font-bold text-sm text-sans">
+                        Click here, if you already have an account?
+                    </div>
+                    <div className="font-bold text-sm text-sans underline underline-offset-4">
+                        <Link to="/auth">
+                            SignIn
+                        </Link>
+                    </div>
                 </div>
             </div>            
         </>

@@ -1,6 +1,16 @@
 import { BlogType } from "@repo/types";
+import updateLikeMethod from "../model/updateLikeModel";
 
 export default function ShortBlogMetaData({blog}: {blog:BlogType}){
+    
+
+    async function updateLike(){
+        const result = await updateLikeMethod(blog.id as number, "inc")
+    }
+
+    function updateDislike(){
+        
+    }
 
     return(
         <div>
@@ -20,7 +30,7 @@ export default function ShortBlogMetaData({blog}: {blog:BlogType}){
                         {blog?.publishDate}
                     </div>
                     <div className="cursor-pointer relative flex flex-col items-center rounded-md p-2">
-                        <div>
+                        <div onClick={updateLike} className="w-fit h-fit">
                             <svg xmlns="http://www.w3.org/2000/svg" 
                                 fill="none" viewBox="0 0 24 24" 
                                 strokeWidth="1.5" stroke="currentColor" 
@@ -47,7 +57,7 @@ export default function ShortBlogMetaData({blog}: {blog:BlogType}){
                         <div>{blog?.likes}</div>
                     </div>
                     <div className="cursor-pointer relative flex flex-col items-center rounded-md p-2">
-                        <div>
+                        <div onClick={updateDislike} className="w-fit h-fit">
                             <svg xmlns="http://www.w3.org/2000/svg" 
                                 fill="none" viewBox="0 0 24 24" 
                                 strokeWidth="1.5" stroke="currentColor" 
