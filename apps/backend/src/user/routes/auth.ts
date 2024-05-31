@@ -125,7 +125,7 @@ router.post("/refreshToken", checkRefreshToken, async (req, res)=>{
             // console.log("User refreshToken data fetched : ")
             // console.log(user);
             if(!(user != null && "id" in user)){
-                throw new Error("Tampered user id in refresh token",{cause:StatusCodes.unauthorized});
+                throw new Error("Tampered user id in refresh token",{cause:StatusCodes.forbidden});
             }
             const userData = {...user, mob:Number(user.mob)}
 
