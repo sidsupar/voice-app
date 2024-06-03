@@ -22,10 +22,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route index element={<SignUpPage />} />
+          <Route path="login" element={<SignInPage />} />
           <Route path="/auth">
-            <Route index element={<SignInPage />} />
-            <Route path="" element={<ProtectedRoute />}>
-              <Route path="" element={<Appbar />}>
+            <Route element={<ProtectedRoute />}>
+              <Route element={<Appbar />}>
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="writeblog" element={<WriteBlog />} />
                 <Route path="blog" element={<ShowBlog />} />

@@ -25,15 +25,15 @@ export const refreshInterceptor = axios.interceptors.response.use(
                     console.log("Credentials refreshed");
                     return axios(originalRequest);
                 } else {
-                    console.log("Token refresh failed, redirecting to auth");
+                    console.log("Token refresh failed, redirecting to login");
                     store.dispatch(checkUserLoginStatusThunk(store.getState()?.userDetails.name as string));
-                    redirect("/auth");
+                    redirect("/login");
                     location.reload();
                     throw new Error("Your login credentials have expired");
                 }
             } catch (err) {
                 console.log("Error during token refresh, redirecting to auth");
-                redirect("/auth");
+                redirect("/login");
                 location.reload();
                 return Promise.reject(err);
             }

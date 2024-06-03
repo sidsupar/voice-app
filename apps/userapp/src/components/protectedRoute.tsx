@@ -24,7 +24,7 @@ export default function ProtectedRoute(){
         if(loginStatus !== true){
             //@ts-ignore
             dispatch(checkUserLoginStatusThunk(userDetails?.name));
-            navigate("/auth");
+            navigate("/login");
         }
         return () => {
             // console.log("Axios interceptors")

@@ -24,13 +24,13 @@ export default function Logout(){
     if(status){
         //@ts-ignore
         dsipatch(checkUserLoginStatusThunk(""));
-        navigate("/auth");
+        navigate("/login");
     }
 
     return(
         <div>
             <SubmitButtonLoadType buttonText= {loginStatus ? "logout":"login"} 
-                                  handleClick={loginStatus?handleLogout : () => {navigate("/auth")}} 
+                                  handleClick={loginStatus?handleLogout : () => {navigate("/login")}} 
                                   loading={loading}
             />
         </div>
