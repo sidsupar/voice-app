@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router"
+import { useParams } from "react-router"
 import { getBlogsModel } from "../model/getBlogs";
 import { BlogType } from "@repo/types";
 import Blogs from "../components/blogs";
@@ -43,10 +43,12 @@ export default function PaginatedBlogs(){
                     await setProgressStep(4, 10, 30,  setProgress);
                     throw new Error("Not able get blogs from getBlogsModel in PaginatedBlogs effect");
                 }
+                //@ts-ignore
                 if(result.data != undefined && "posts" in result?.data){
                     await setProgressStep(4, 10, 30,  setProgress);
                     console.log("Setting blogs inside PaginatedBlogs after fetch");
                     await setProgressStep(5, 10, 30,  setProgress);
+                    //@ts-ignore
                     setBlogs(result?.data?.posts);
                     await setProgressStep(6, 10, 30,  setProgress);
                 }
@@ -68,7 +70,7 @@ export default function PaginatedBlogs(){
 
     function onClickNext(e:React.SyntheticEvent){
         const tgt = e.target as HTMLInputElement;
-        console.log("next")
+        console.log("next + "+ tgt)
         setShow((sh:{page:number, skip:number}) => {    
                                                         return {...sh, 
                                                                 page:(sh.page + 1), 
@@ -80,6 +82,7 @@ export default function PaginatedBlogs(){
     function onClickPrev(e:React.SyntheticEvent){
         console.log("prev")
         const tgt = e.target as HTMLInputElement;
+        console.log(tgt)
         setShow((sh:{page:number, skip:number}) => {
                                                         let newPage = sh.page;
                                                         let newSkip = sh.skip;

@@ -5,7 +5,7 @@ import './index.css'
 import { Provider } from 'react-redux'
 import { persistor, store } from './globalStates/store.ts'
 import { PersistGate } from 'redux-persist/integration/react'
-import { refreshInterceptor } from './axiosInterceptors.ts'
+// import { refreshInterceptor } from './axiosInterceptors.ts'
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

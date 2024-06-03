@@ -12,6 +12,7 @@ export default function SearchBarComponent(){
 
     return(
         <div className="">
+            {/* @ts-ignore */}
             <SearchBar onClickHandler={onClickHandler} take={5} skip={0} onInputHandler={(input:string, skip:number, take:number)
             :Promise<{
                 status:boolean,

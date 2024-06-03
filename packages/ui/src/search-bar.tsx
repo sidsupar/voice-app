@@ -39,6 +39,7 @@ export const SearchBar = ({onInputHandler, skip=0, take=5,onClickHandler}: Searc
                         console.log(results)
                         if("status" in results && "data" in results && results.status ){
                           console.log("Setting result");
+                          //@ts-ignore
                           setResult(results.data.posts as Array<BlogType>)
                        }
                       }                       

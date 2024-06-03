@@ -1,6 +1,5 @@
 import { StatusCodes } from "@repo/types";
 import axios from "axios"
-import { useState } from "react";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL
 const USER_ROUTE = import.meta.env.VITE_USER_ROUTE

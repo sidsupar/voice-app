@@ -1,5 +1,5 @@
 import { BlogType } from "@repo/types";
-import { lazy, useEffect, useLayoutEffect, useMemo, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import { useLocation } from "react-router"
 import { getBlogById } from "../model/getBlogById";
 import setProgressStep from "../model/setProgressStepValue";

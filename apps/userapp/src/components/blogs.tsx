@@ -1,6 +1,5 @@
 import { BlogType } from "@repo/types";
 import ShortBlogCard from "./shortBlogCard";
-import { Link } from "react-router-dom";
 
 export default function Blogs({blogs}: {blogs:Array<BlogType>}){
 

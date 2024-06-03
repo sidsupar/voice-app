@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
+"./ping-loader": "./src/ping-loader.tsx",
 "./input-element-hideshow": "./src/input-element-hideshow.tsx",
 "./emoji-generator": "./src/emoji-generator.tsx",
 "./search-bar": "./src/search-bar.tsx",

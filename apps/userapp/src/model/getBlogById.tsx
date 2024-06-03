@@ -1,7 +1,5 @@
 import { BlogType, StatusCodes } from "@repo/types";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { setBlogsState } from "../globalStates/blogsSlice";
 import { getStoreState } from "../globalStates/store";
 import StoreBlogInCache from "./storeBlogInCache";
 

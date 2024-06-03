@@ -1,6 +1,6 @@
 import { BlogType } from "@repo/types";
 import { getBlogsModel } from "../model/getBlogs";
-import { lazy, useDeferredValue, useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import ProgressBar from "../components/progressbar";
 import setProgressStep from "../model/setProgressStepValue";
 const Blogs = lazy(() => import("../components/blogs"));
@@ -26,6 +26,7 @@ export default function Dashoboard(){
             
             console.log(data);
             if(status){
+                //@ts-ignore
                 setData(data.result.posts);
                 showError(false)
                 await setProgressStep(4, 4, 100, setProgress);
@@ -60,6 +61,7 @@ export default function Dashoboard(){
             <div>
                 {!error ?
                     <div className="">
+                        {/* @ts-ignore */}
                         <Blogs blogs={data}/>
                     </div>:
                     <div className="text-red-500">

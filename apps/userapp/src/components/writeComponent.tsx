@@ -18,8 +18,10 @@ export default function WriteComponent(){
                 if(blog != undefined && blog?.length > 0 && heading != undefined && heading?.length > 0){
                     console.log("Calling writePost");
                     const res = await writePost(blog, heading);
+                    //@ts-ignore
                     if("status" in res && res?.status == StatusCodes.created){
                         console.log("Written successfully");
+                        //@ts-ignore
                         console.log(res.data.id);
                         navigate("/auth/dashboard");
                     }else{
@@ -34,6 +36,8 @@ export default function WriteComponent(){
     },[clicked])
 
     function onClickHandler(e:React.SyntheticEvent){
+        const tgt = e.target as HTMLInputElement;
+        console.log(tgt);
         setClicked((val:boolean) => !val);
     }
 

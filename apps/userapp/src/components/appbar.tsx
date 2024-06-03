@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import Logout from "./logout";
 import AvatarComponent from "./avatarComponent";
 import { useSelector } from "react-redux";
@@ -13,7 +13,8 @@ export default function Appbar(){
     console.log("Inside AppBar compnent--------------------------------------------------------------");
 
     return(
-        <div className="max-h-fit min-h-[15vh] relative flex justify-center bg-slate-100 dark:bg-gray-600">
+        <div className="flex flex-col">
+            <div className="max-h-fit min-h-[15vh] relative flex justify-center bg-slate-100 dark:bg-gray-600">
             <div className="border-b pt-2 pb-2 pl-1 pr-1 grid grid-cols-12 w-screen">
                 <div className="flex gap-5 items-center p-2 col-span-12 xl:col-span-4">
                     <div>
@@ -72,6 +73,10 @@ export default function Appbar(){
                     </div>
                 </div>                              
             </div>
+        </div>
+        <div>
+            <Outlet />
+        </div>
         </div>
     )
 }

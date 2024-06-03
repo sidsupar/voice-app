@@ -1,14 +1,15 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 import { checkUserLoginStatusThunk, setUserDetailsState } from "../globalStates/userDataSlice";
 import { useEffect } from "react";
-import Appbar from "./appbar";
+//@ts-ignore
 import { refreshInterceptor } from "../axiosInterceptors";
+//@ts-ignore
 import axios from "axios";
 
 console.log("Interceptor imported");
 
-export default function ProtectedRoute({children}: {children:React.ReactNode}){
+export default function ProtectedRoute(){
 
     const userDetails = useSelector(setUserDetailsState);
     // console.log("UserDetails using useSelector in ProtectedRoute")
@@ -29,6 +30,7 @@ export default function ProtectedRoute({children}: {children:React.ReactNode}){
             // console.log("Axios interceptors")
             // console.log(axios.interceptors)
             // console.log("Axios interceptors")
+            console.log(`ignore = ${ignore}`);
             ignore = true;
         };
     });
@@ -36,10 +38,7 @@ export default function ProtectedRoute({children}: {children:React.ReactNode}){
     return(
         <div className="flex flex-col">
             <div>
-                <Appbar />
-            </div>
-            <div>
-                {children}
+                <Outlet />
             </div>
         </div>
     )

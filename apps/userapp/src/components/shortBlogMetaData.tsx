@@ -5,7 +5,9 @@ export default function ShortBlogMetaData({blog}: {blog:BlogType}){
     
 
     async function updateLike(){
-        const result = await updateLikeMethod(blog.id as number, "inc")
+        const result = await updateLikeMethod(blog.id as number, "inc");
+        console.log("Printing result Like");
+        console.log(result);
     }
 
     function updateDislike(){
