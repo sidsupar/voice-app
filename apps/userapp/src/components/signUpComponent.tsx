@@ -72,7 +72,7 @@ export default function SignUpComponent(){
                         Click here, if you already have an account?
                     </div>
                     <div className="font-bold text-sm text-sans underline underline-offset-4">
-                        <Link to="/auth">
+                        <Link to="/login">
                             SignIn
                         </Link>
                     </div>
